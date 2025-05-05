@@ -22,11 +22,23 @@ const Galones = () => {
   };
 
   return (
-    <div className="section">
+    <div className="form-container mb-8 flex flex-col items-center gap-y-4">
       <h2>Galones necesarios</h2>
-      <input type="number" value={distancia1} onChange={e => setDistancia1(e.target.value)} placeholder="Distancia (km)" />
-      <input type="number" value={rendimiento1} onChange={e => setRendimiento1(e.target.value)} placeholder="Rendimiento (km/galón)" className='w-full mb-3 p-2 rounded border border-gray-400 bg-gray-900 text-white'/>
-      <div className="buttons">
+      <input
+        type="number"
+        value={distancia1}
+        onChange={e => setDistancia1(e.target.value)}
+        placeholder="Distancia (km)"
+        className="w-full max-w-md p-2 rounded border border-gray-400 bg-gray-900 text-white"
+      />
+      <input
+        type="number"
+        value={rendimiento1}
+        onChange={e => setRendimiento1(e.target.value)}
+        placeholder="Rendimiento (km/galón)"
+        className="w-full max-w-md p-2 rounded border border-gray-400 bg-gray-900 text-white"
+      />
+      <div className="flex gap-4">
         <button className="general-button" onClick={calcularGalones}>Calcular</button>
         <button className="general-button" onClick={limpiarGalones}>Limpiar</button>
       </div>

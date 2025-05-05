@@ -22,11 +22,23 @@ const Combustible = () => {
   };
 
   return (
-    <div className="section">
+    <div className="form-container mb-8 flex flex-col items-center gap-y-4">
       <h2>Revisión de combustible</h2>
-      <input type="number" value={actual2} onChange={e => setActual2(e.target.value)} placeholder="Nivel actual (gal)" />
-      <input type="number" value={maximo2} onChange={e => setMaximo2(e.target.value)} placeholder="Tanque máximo (gal)" />
-      <div className="buttons">
+      <input
+        type="number"
+        value={actual2}
+        onChange={e => setActual2(e.target.value)}
+        placeholder="Nivel actual (gal)"
+        className="w-full max-w-md p-2 rounded border border-gray-400 bg-gray-900 text-white"
+      />
+      <input
+        type="number"
+        value={maximo2}
+        onChange={e => setMaximo2(e.target.value)}
+        placeholder="Tanque máximo (gal)"
+        className="w-full max-w-md p-2 rounded border border-gray-400 bg-gray-900 text-white"
+      />
+      <div className="flex gap-4">
         <button className="general-button" onClick={calcularCombustible}>Calcular</button>
         <button className="general-button" onClick={limpiarCombustible}>Limpiar</button>
       </div>

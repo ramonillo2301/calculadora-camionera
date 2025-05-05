@@ -80,6 +80,20 @@ input {
   color: var(--text);
   transition: border-color 0.3s ease;
 }
+.form-input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+
+.result-text {
+  margin-top: 1rem;
+  font-weight: bold;
+}
 input::placeholder {
   color: var(--text);
   opacity: 0.6;
@@ -111,15 +125,16 @@ html {
 /* 📦 Tarjeta */
 .form-container {
   background: rgba(255, 255, 255, 0.15); /* Fondo translúcido */
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px var(--shadow);
   border-radius: 12px;
-  width: 100%;
+  padding: 1.5rem;
   animation: fadeIn 0.5s ease-out;
+  width: 100%;
+  margin: 0 auto 1rem auto;
 }
-
 
 .form-container:hover {
   transform: translateY(-5px);
@@ -179,8 +194,6 @@ h1, h2 {
     transform: scale(1);
   }
 }
-
-
 
 /* ✨ Animación botón */
 @keyframes floatIcon {
