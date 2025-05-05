@@ -22,27 +22,41 @@ const Galones = () => {
   };
 
   return (
-    <div className="form-container mb-8 flex flex-col items-center gap-y-4">
-      <h2>Galones necesarios</h2>
-      <input
-        type="number"
-        value={distancia1}
-        onChange={e => setDistancia1(e.target.value)}
-        placeholder="Distancia (km)"
-        className="w-full max-w-md p-2 rounded border border-gray-400 bg-gray-900 text-white"
-      />
-      <input
-        type="number"
-        value={rendimiento1}
-        onChange={e => setRendimiento1(e.target.value)}
-        placeholder="Rendimiento (km/galón)"
-        className="w-full max-w-md p-2 rounded border border-gray-400 bg-gray-900 text-white"
-      />
-      <div className="flex gap-4">
-        <button className="general-button" onClick={calcularGalones}>Calcular</button>
-        <button className="general-button" onClick={limpiarGalones}>Limpiar</button>
+    <div className="section p-6 rounded-lg shadow-lg bg-white max-w-md mx-auto">
+      <h2 className="text-xl font-bold mb-4 text-center">Galones necesarios</h2>
+      <div className="mb-4">
+        <input 
+          type="number" 
+          value={distancia1} 
+          onChange={e => setDistancia1(e.target.value)} 
+          placeholder="Distancia (km)"
+          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+        />
       </div>
-      <p>{resultado1}</p>
+      <div className="mb-4">
+        <input 
+          type="number" 
+          value={rendimiento1} 
+          onChange={e => setRendimiento1(e.target.value)} 
+          placeholder="Rendimiento (km/galón)"
+          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      <div className="flex justify-between gap-4">
+        <button 
+          className="general-button bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600" 
+          onClick={calcularGalones}
+        >
+          Calcular
+        </button>
+        <button 
+          className="general-button bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600" 
+          onClick={limpiarGalones}
+        >
+          Limpiar
+        </button>
+      </div>
+      {resultado1 && <p className="mt-4 text-center text-gray-700">{resultado1}</p>}
     </div>
   );
 };
