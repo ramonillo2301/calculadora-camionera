@@ -113,7 +113,7 @@ body.dark-mode .navbar {
 h1, h2  {
   text-align: center;
   margin-bottom: 1rem;
-  color: var(--accent);
+  color: #ffffff;
 }
 
 p {
@@ -121,8 +121,10 @@ p {
   text-transform: uppercase;
   font-size: 16px;
   font-family: 'poppins' sans-serif;
-  color: #ccc;
+  font-weight: 600;
+  color: #ffffff;
 }
+
 
 /* Contenedor de los inputs y botones */
 .input-container, .button-container {
