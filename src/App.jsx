@@ -73,16 +73,17 @@ function App() {
 
         {/* Navegación principal */}
         <nav className="navbar">
-          <NavLink to="/" className="nav-link" end>
-            Formulario General
-          </NavLink>
-          <NavLink to="/galones-litros" className="nav-link">
-            Galones a Litros
-          </NavLink>
-          <NavLink to="/km-millas" className="nav-link">
-            Km a Millas
-          </NavLink>
-        </nav>
+        <NavLink to="/" className="nav-link" end>
+  <i className="fa fa-home"></i> Inicio
+</NavLink>
+<NavLink to="/galones-litros" className="nav-link">
+  <i className="fa fa-tint"></i> Calcular Volúmen
+</NavLink>
+<NavLink to="/km-millas" className="nav-link">
+  <i className="fa fa-road"></i> Distancia
+</NavLink>
+
+</nav>
 
         {/* Rutas */}
         <Routes>
