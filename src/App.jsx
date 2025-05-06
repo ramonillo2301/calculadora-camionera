@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import './App.css';
+
 import Galones from './Galones';
 import Combustible from './Combustible';
 import Horas from './Horas';
@@ -9,40 +10,35 @@ import Peso from './Peso';
 import GalonesLitros from './GalonesLitros';
 import KmMillas from './KmMillas';
 import ThemeToggle from './ThemeToggle';
-import './ThemeToggle.css'
+import { UnitProvider } from './UnitContext';
 
-import 'font-awesome/css/font-awesome.min.css';
-
-function FormularioGeneral() {
-  return (
-    <div className="form-container">
-      <Galones />
-      <Combustible />
-      <Horas />
-      <Pago />
-      <Peso />
-    </div>
-  );
-}
+// Íconos válidos de lucide-react
+import {
+  Home,
+  Droplet,
+  GaugeCircle, // Para Distancia
+  Clock,
+  CreditCard,
+  Scale,       // Para Peso
+} from 'lucide-react';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [showToggle, setShowToggle] = useState(true);
 
-  // Detectar modo preferido o cargar el último guardado
+  // Detectar preferencia del sistema o modo guardado
   useEffect(() => {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const savedMode = localStorage.getItem('darkMode');
     setDarkMode(savedMode ? JSON.parse(savedMode) : prefersDark);
   }, []);
 
-  // Aplicar clase al body y guardar estado
   useEffect(() => {
     document.body.classList.toggle('dark-mode', darkMode);
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }, [darkMode]);
 
-  // Mostrar toggle por interacción
+  // Mostrar el botón flotante por 5 segundos al mover el mouse o tocar la pantalla
   useEffect(() => {
     let timeout = setTimeout(() => setShowToggle(false), 5000);
     const showAgain = () => {
@@ -62,37 +58,56 @@ function App() {
   const toggleTheme = () => setDarkMode(prev => !prev);
 
   return (
-    <div className="app-container">
-      <Router>
-        {/* Botón flotante de modo oscuro */}
-        {showToggle && (
-          <div className="toggle-container" style={{ position: 'fixed', top: '1rem', right: '1rem', zIndex: 1000 }}>
-            <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
-          </div>
-        )}
+    <UnitProvider>
+      <div className="app-container">
+        <Router>
+          {/* Botón flotante de modo oscuro */}
+          {showToggle && (
+            <div className="fixed top-4 right-4 z-50">
+              <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
+            </div>
+          )}
 
-        {/* Navegación principal */}
-        <nav className="navbar">
-        <NavLink to="/" className="nav-link" end>
-  <i className="fa fa-home"></i> Inicio
-</NavLink>
-<NavLink to="/galones-litros" className="nav-link">
-  <i className="fa fa-tint"></i> Calcular Volúmen
-</NavLink>
-<NavLink to="/km-millas" className="nav-link">
-  <i className="fa fa-road"></i> Distancia
-</NavLink>
+          {/* Navegación principal */}
+          <nav className="navbar flex flex-wrap justify-center gap-4 p-4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white">
+            <NavLink to="/" className="nav-link flex items-center gap-1" end>
+              <Home className="w-5 h-5" /> Galones
+            </NavLink>
+            <NavLink to="/combustible" className="nav-link flex items-center gap-1">
+              <Droplet className="w-5 h-5" /> Combustible
+            </NavLink>
+            <NavLink to="/horas" className="nav-link flex items-center gap-1">
+              <Clock className="w-5 h-5" /> Horas
+            </NavLink>
+            <NavLink to="/pago" className="nav-link flex items-center gap-1">
+              <CreditCard className="w-5 h-5" /> Pago
+            </NavLink>
+            <NavLink to="/peso" className="nav-link flex items-center gap-1">
+              <Scale className="w-5 h-5" /> Peso
+            </NavLink>
+            
+            <NavLink to="/galones-litros" className="nav-link flex items-center gap-1">
+              <Droplet className="w-5 h-5" /> Volumen
+            </NavLink>
+            <NavLink to="/km-millas" className="nav-link flex items-center gap-1">
+              <GaugeCircle className="w-5 h-5" /> Distancia
+            </NavLink>
+          </nav>
 
-</nav>
-
-        {/* Rutas */}
-        <Routes>
-          <Route path="/" element={<FormularioGeneral />} />
-          <Route path="/galones-litros" element={<GalonesLitros />} />
-          <Route path="/km-millas" element={<KmMillas />} />
-        </Routes>
-      </Router>
-    </div>
+          {/* Rutas */}
+          <Routes>
+            <Route path="/" element={<Galones />} />
+            <Route path="/combustible" element={<Combustible />} />
+            <Route path="/horas" element={<Horas />} />
+            <Route path="/pago" element={<Pago />} />
+            <Route path="/peso" element={<Peso />} />
+            <Route path="/galones-litros" element={<GalonesLitros />} />
+            <Route path="/km-millas" element={<KmMillas />} />
+          </Routes>
+        </Router>
+      </div>
+    </UnitProvider>
   );
 }
+
 export default App;

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { useUnidad } from './UnitContext'; // Asegúrate de que la ruta es correcta
 
 const Galones = () => {
+  const { unidad, setUnidad } = useUnidad(); // Accede al contexto
   const [distancia1, setDistancia1] = useState('');
   const [rendimiento1, setRendimiento1] = useState('');
   const [resultado1, setResultado1] = useState('');
-  const [unidad, setUnidad] = useState('km'); // Nueva variable para la unidad
 
   const calcularGalones = () => {
     const d = parseFloat(distancia1);
