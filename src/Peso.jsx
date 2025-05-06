@@ -1,62 +1,79 @@
 import React, { useState } from 'react';
 
 const Peso = () => {
-  const [distancia3, setDistancia3] = useState('');
-  const [peso3, setPeso3] = useState('');
-  const [resultado3, setResultado3] = useState('');
+  const [distancia, setDistancia] = useState('');
+  const [pesoPorUnidad, setPesoPorUnidad] = useState('');
+  const [unidadPeso, setUnidadPeso] = useState('kg');
+  const [resultado, setResultado] = useState('');
 
   const calcularPeso = () => {
-    const d = parseFloat(distancia3);
-    const p = parseFloat(peso3);
+    const d = parseFloat(distancia);
+    const p = parseFloat(pesoPorUnidad);
     if (!isNaN(d) && !isNaN(p)) {
-      setResultado3(`El peso total es ${(d * p).toFixed(2)} kg.`);
+      const total = d * p;
+      const resultadoFinal = unidadPeso === 'kg'
+        ? `${total.toFixed(2)} kg`
+        : `${(total * 2.20462).toFixed(2)} lb`;
+      setResultado(`Peso total estimado: ${resultadoFinal}`);
     } else {
-      setResultado3("Completa ambos campos correctamente.");
+      setResultado("Completa ambos campos correctamente.");
     }
   };
 
-  const limpiarPeso = () => {
-    setDistancia3('');
-    setPeso3('');
-    setResultado3('');
+  const limpiarCampos = () => {
+    setDistancia('');
+    setPesoPorUnidad('');
+    setResultado('');
   };
 
   return (
-    <div className="section p-6 rounded-lg shadow-lg bg-white max-w-md mx-auto">
-      <h2 className="text-xl font-bold mb-4 text-center">Peso total</h2>
-      <div className="mb-4">
-        <input 
-          type="number" 
-          value={distancia3} 
-          onChange={e => setDistancia3(e.target.value)} 
-          placeholder="Distancia (km)"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-        />
+    <div className="bg-black bg-opacity-30 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white border-opacity-10 text-white max-w-md mx-auto my-4">
+      <h2 className="text-xl font-bold text-center text-yellow-400 mb-4">Peso total estimado</h2>
+      
+      <div className="mb-3">
+        <label className="block mb-1 text-sm text-gray-300">Unidad de resultado</label>
+        <select
+          value={unidadPeso}
+          onChange={e => setUnidadPeso(e.target.value)}
+          className="w-full p-2 rounded-md bg-gray-900 bg-opacity-40 border border-white border-opacity-20 text-white focus:outline-none"
+        >
+          <option value="kg">Kilogramos (kg)</option>
+          <option value="lb">Libras (lb)</option>
+        </select>
       </div>
-      <div className="mb-4">
-        <input 
-          type="number" 
-          value={peso3} 
-          onChange={e => setPeso3(e.target.value)} 
-          placeholder="Peso por km (kg/km)"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-      <div className="flex justify-between gap-4">
-        <button 
-          className="general-button bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600" 
+
+      <input
+        type="number"
+        value={distancia}
+        onChange={e => setDistancia(e.target.value)}
+        placeholder="Distancia (km)"
+        className="w-full mb-3 p-2 rounded-md bg-gray-900 bg-opacity-40 border border-white border-opacity-20 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      />
+
+      <input
+        type="number"
+        value={pesoPorUnidad}
+        onChange={e => setPesoPorUnidad(e.target.value)}
+        placeholder="Peso por km (kg/km)"
+        className="w-full mb-3 p-2 rounded-md bg-gray-900 bg-opacity-40 border border-white border-opacity-20 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      />
+
+      <div className="flex flex-col sm:flex-row gap-3 mt-4">
+        <button
+          className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-lg shadow"
           onClick={calcularPeso}
         >
           Calcular
         </button>
-        <button 
-          className="general-button bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600" 
-          onClick={limpiarPeso}
+        <button
+          className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg shadow"
+          onClick={limpiarCampos}
         >
           Limpiar
         </button>
       </div>
-      {resultado3 && <p className="mt-4 text-center text-gray-700">{resultado3}</p>}
+
+      {resultado && <p className="mt-4 text-center">{resultado}</p>}
     </div>
   );
 };
